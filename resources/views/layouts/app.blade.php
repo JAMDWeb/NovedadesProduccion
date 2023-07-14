@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'NovedadeProduccion') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,12 +15,16 @@
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        @stack('css')
+
         <!-- Styles -->
-       
+        <link rel="stylesheet" href="{{ asset('Vendor/fontawesome-free-web/css/all.min.css') }}">
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+
+        <x-notifications/> 
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
@@ -28,7 +32,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
@@ -43,5 +47,33 @@
         @stack('modals')
 
         @livewireScripts
+
+        @stack('js')
+
+        <script>
+            // Escuchar un evento livewire
+            Livewire.on('error', function(message) {
+                //alert(message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: message,
+    
+                })
+            });
+    
+            Livewire.on('alert', function(message) {
+                //alert(message);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Felicitaciones ...',
+                    text: message,
+    
+                })
+            });
+    
+           
+           
+        </script>
     </body>
 </html>

@@ -62,6 +62,26 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+          // Segunda base de datos : FSC
+          'mysql_fsc' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_FSC', '127.0.0.1'),
+            'port' => env('DB_PORT_FSC', '3306'),
+            'database' => env('DB_DATABASE_FSC', 'forge'),
+            'username' => env('DB_USERNAME_FSC', 'forge'),
+            'password' => env('DB_PASSWORD_FSC', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
